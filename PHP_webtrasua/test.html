@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+<body>
+    <style>
+        #radioBtn .notActive{
+        color: #3276b1;
+        background-color: #fff;
+        }
+        div.stars {
+  width: 270px;
+  display: inline-block;
+}
+ 
+input.star { display: none; }
+ 
+label.star {
+  float: right;
+  padding: 10px;
+  font-size: 36px;
+  color: #444;
+  transition: all .2s;
+}
+ 
+input.star:checked ~ label.star:before {
+  content: '\f005';
+  color: #FD4;
+  transition: all .25s;
+}
+ 
+input.star-5:checked ~ label.star:before {
+  color: #FE7;
+  text-shadow: 0 0 20px #952;
+}
+ 
+input.star-1:checked ~ label.star:before { color: #F62; }
+ 
+label.star:hover { transform: rotate(-15deg) scale(1.3); }
+ 
+label.star:before {
+  content: '\f006';
+  font-family: FontAwesome;
+}
+    </style>
+<link rel='stylesheet prefetch' href='https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css'>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="jquery/jquery-1.11.1.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<div class="col-md-3">
+  <p>min = 1 và max = 10</p>
+  <div class="input-group"> <span class="input-group-btn">
+    <button type="button" class="btn btn-danger btn-number" data-type="minus" data-field="quant[2]"> <span class="glyphicon glyphicon-minus"></span> </button>
+    </span>
+    <input name="quant[2]" class="form-control input-number" value="1" min="1" max="10" type="text">
+    <span class="input-group-btn">
+    <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]"> <span class="glyphicon glyphicon-plus"></span> </button>
+    </span> </div>
+</div>
+    <div class="form-group">
+        <label for="happy" class="col-sm-4 col-md-4 control-label text-right">Are you happy ?</label>
+        <div class="col-sm-7 col-md-7">
+          <div class="input-group">
+            <div id="radioBtn" class="btn-group">
+              <a class="btn btn-primary btn-sm active" data-toggle="happy" data-title="Y">YES</a>
+              <a class="btn btn-primary btn-sm notActive" data-toggle="happy" data-title="N">NO</a>
+            </div>
+            <input type="hidden" name="happy" id="happy">
+          </div>
+</div>
+        </div>
+    
+    <div class="stars">
+  <form action="">
+    <input class="star star-5" id="star-5" type="radio" name="star"/>
+    <label class="star star-5" for="star-5"></label>
+    <input class="star star-4" id="star-4" type="radio" name="star"/>
+    <label class="star star-4" for="star-4"></label>
+    <input class="star star-3" id="star-3" type="radio" name="star"/>
+    <label class="star star-3" for="star-3"></label>
+    <input class="star star-2" id="star-2" type="radio" name="star"/>
+    <label class="star star-2" for="star-2"></label>
+    <input class="star star-1" id="star-1" type="radio" name="star"/>
+    <label class="star star-1" for="star-1"></label>
+  </form>
+</div>
+    
+    
+    
+    
+    
+    <script type="text/javascript">
+$( document ).ready(function() {
+    $('.btn-number').click(function(e){
+        e.preventDefault();
+        
+        var fieldName = $(this).attr('data-field');
+        var type      = $(this).attr('data-type');
+        var input = $("input[name='"+fieldName+"']");
+        var currentVal = parseInt(input.val());
+        if (!isNaN(currentVal)) {
+            if(type == 'minus') {
+                var minValue = parseInt(input.attr('min')); 
+                if(!minValue) minValue = 1;
+                if(currentVal > minValue) {
+                    input.val(currentVal - 1).change();
+                } 
+                if(parseInt(input.val()) == minValue) {
+                    $(this).attr('disabled', true);
+                }
+    
+            } else if(type == 'plus') {
+                var maxValue = parseInt(input.attr('max'));
+                if(!maxValue) maxValue = 9999999999999;
+                if(currentVal < maxValue) {
+                    input.val(currentVal + 1).change();
+                }
+                if(parseInt(input.val()) == maxValue) {
+                    $(this).attr('disabled', true);
+                }
+    
+            }
+        } else {
+            input.val(0);
+        }
+    });
+    $('.input-number').focusin(function(){
+       $(this).data('oldValue', $(this).val());
+    });
+    $('.input-number').change(function() {
+        
+        var minValue =  parseInt($(this).attr('min'));
+        var maxValue =  parseInt($(this).attr('max'));
+        if(!minValue) minValue = 1;
+        if(!maxValue) maxValue = 9999999999999;
+        var valueCurrent = parseInt($(this).val());
+        
+        var name = $(this).attr('name');
+        if(valueCurrent >= minValue) {
+            $(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
+        } else {
+            alert('Sorry, the minimum value was reached');
+            $(this).val($(this).data('oldValue'));
+        }
+        if(valueCurrent <= maxValue) {
+            $(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
+        } else {
+            alert('Sorry, the maximum value was reached');
+            $(this).val($(this).data('oldValue'));
+        }
+        
+        
+    });
+    $(".input-number").keydown(function (e) {
+            // Allow: backspace, delete, tab, escape, enter and .
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                 // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) || 
+                 // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                     // let it happen, don't do anything
+                     return;
+            }
+            // Ensure that it is a number and stop the keypress
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+    });
+});
+        $('#radioBtn a').on('click', function(){
+    var sel = $(this).data('title');
+    var tog = $(this).data('toggle');
+    $('#'+tog).prop('value', sel);
+     
+    $('a[data-toggle="'+tog+'"]').not('[data-title="'+sel+'"]').removeClass('active').addClass('notActive');
+    $('a[data-toggle="'+tog+'"][data-title="'+sel+'"]').removeClass('notActive').addClass('active');
+});
+</script>
+</body>
+</html>
