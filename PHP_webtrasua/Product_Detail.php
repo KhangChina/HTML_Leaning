@@ -11,146 +11,128 @@
 <script src="bootstrap/bootstrap.min.js" type="text/javascript"></script>
 </head>
 <body>
-<style>
-        #radioBtn .notActive{
-        color: #3276b1;
-        background-color: #fff;
-        }
+<style>       
     div.stars {
   width: 270px;
   display: inline-block;
 }
  
 input.star { display: none; }
- 
 label.star {
   float: right;
   padding: 10px;
   font-size: 36px;
   color: #444;
   transition: all .2s;
-}
- 
+} 
 input.star:checked ~ label.star:before {
   content: '\f005';
   color: #FD4;
   transition: all .25s;
 }
- 
 input.star-5:checked ~ label.star:before {
   color: #FE7;
   text-shadow: 0 0 20px #952;
 }
- 
 input.star-1:checked ~ label.star:before { color: #F62; }
- 
 label.star:hover { transform: rotate(-15deg) scale(1.3); }
- 
 label.star:before {
   content: '\f006';
   font-family: FontAwesome;
+}
+/*-----------------------------------------------------------*/
+      .radio {
+  margin: 16px 0;
+  display: block;
+  cursor: pointer;
+}
+.radio input {
+  display: none;
+}
+.radio input + span {
+  line-height: 22px;
+  height: 22px;
+  padding-left: 22px;
+  display: block;
+  position: relative;
+}
+.radio input + span:not(:empty) {
+  padding-left: 30px;
+}
+.radio input + span:before, .radio input + span:after {
+  content: '';
+  width: 22px;
+  height: 22px;
+  display: block;
+  border-radius: 50%;
+  left: 0;
+  top: 0;
+  position: absolute;
+}
+.radio input + span:before {
+  background: #d1d7e3;
+  transition: background 0.2s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 2);
+}
+.radio input + span:after {
+  background: #fff;
+  transform: scale(0.78);
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.4);
+}
+.radio input:checked + span:before {
+  transform: scale(1.04);
+  background: #5d9bfb;
+}
+.radio input:checked + span:after {
+  transform: scale(0.4);
+  transition: transform 0.3s ease;
+}
+.radio:hover input + span:before {
+  transform: scale(0.92);
+}
+.radio:hover input + span:after {
+  transform: scale(0.74);
+}
+.radio:hover input:checked + span:after {
+  transform: scale(0.4);
+}
+body .twitter {
+  position: fixed;
+  display: block;
+  right: 24px;
+  bottom: 24px;
+  opacity: 0.5;
+  color: #212533;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.4s ease;
+}
+body .twitter:hover {
+  opacity: 1;
+}
+body .twitter img {
+  display: block;
+  height: 36px;
 }
     </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <script src="jquery/jquery-1.11.1.min.js"></script> 
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <div id="page">
-<header class="header-container"> 
-  <!-- Navbar -->
-  <nav>
-    <div class="header container">
-      <div class="row">
-        <div class="col-xs-12"> 
-          <!-- Header Logo -->
-          <div class="col-md-2 col-lg-2 col-sm-8 col-xs-7 logo-header"> <a class="logo" href="index.html"> <img alt="Coffee House" src="images/logo.png"/> </a> </div>
-          <div class="nav-mobile hidden-lg hidden-md">
-            <div class="top-cart-contain" id="open_shopping_cart">
-              <div class="mini-cart">
-                <div class="basket dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"> <a href="p/gio-hang.html"><i class="fa fa-shopping-cart"></i><span class="item_count"><span class="simpleCart_quantity"></span></span></a> </div>
-                <ul class="mini-products-list" id="cart-sidebar">
-                  <div class="top-cart-content open_button arrow_box shopping_cart dropdown find" data-amount="0" style="display: none;">
-                    <ol class="cart-products-list" id="top-cart-sidebar">
-                      <div class="simpleCart_items"></div>
-                    </ol>
-                    <strong>Tổng giá tiền:</strong> <span class="price" id="jshop_summ_product"> <span class="simpleCart_finalTotal"></span></span>
-                    <div class="animated_item actions"><a class=" view-cart" href="p/gio-hang.html">Giỏ hàng</a><a class=" btn-checkout" href="p/thanh-toan.html">Thanh toán</a></div>
-                  </div>
-                </ul>
-              </div>
-            </div>
-            <!-- Header Top Links -->
-            <div class="toplinks">
-              <div class="links">
-                <div class="login"> <a href="login/login.html"></a> 
-                  <!--                                            <a href="login/login.html" title="Đăng nhập"><i class="fa fa-user"></i></a>--> 
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- End Header Logo -->
-          <div class="col-md-10 col-lg-10 col-sm-12">
-            <div class="nav-inner">
-              <ul class="" id="nav">
-                <li class="level0 parent drop-menu active"> <a href="index.html"><span>Trang chủ</span></a> </li>
-                <li class="level0 parent drop-menu "> <a href="gioi-thieu.html"><span>Giới thiệu</span></a> </li>
-                <li class="level0 parent drop-menu "> <a href="collections/all.html"><span>Sản phẩm</span></a>
-                  <ul class="level1" style="display: none;">
-                    <li class="level1 first "> <a href="san-pham-noi-bat.html"> <span>Sản phẩm nổi bật</span> </a> </li>
-                    <li class="level1 first "> <a href="san-pham-khuyen-mai.html"> <span>Sản phẩm khuyến mại</span> </a> </li>
-                    <li class="level1 first "> <a href="frontpage.html"> <span>Sản phẩm mới</span> </a> </li>
-                  </ul>
-                </li>
-                <li class="level0 parent drop-menu"><a href="tin-tuc.html"><span>Tin tức</span> </a> </li>
-                <li class="level0 parent drop-menu"><a href="lien-he.html"><span>Liên hệ</span> </a> </li>
-              </ul>
-            </div>
-            <div class="nav-inner hidden-sm hidden-xs" style="z-index:0">
-              <div class="top-cart-contain" >
-                <div class="mini-cart">
-                  <div class="basket dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"> <a href="p/gio-hang.html"> <i class="fa fa-shopping-cart"></i> Giỏ hàng <span class="cart-total">(<span class="simpleCart_quantity"></span>)</span> </a> </div>
-                  <ul class="mini-products-list" id="cart-sidebar">
-                    <div class="top-cart-content open_button arrow_box shopping_cart dropdown find" data-amount="0" style="display: none;">
-                      <ol class="cart-products-list" id="top-cart-sidebar">
-                        <div class="simpleCart_items"></div>
-                      </ol>
-                      <strong>Tổng giá tiền:</strong> <span class="price" id="jshop_summ_product"> <span class="simpleCart_finalTotal"></span></span>
-                      <div class="animated_item actions"> <a class=" view-cart" href="p/gio-hang.html">Giỏ hàng</a> <a class=" btn-checkout" href="p/thanh-toan.html">Thanh toán</a> </div>
-                    </div>
-                  </ul>
-                </div>
-              </div>
-              <!-- Header Top Links -->
-              <div class="toplinks">
-                <div class="links">
-                  <div class="login"> <a href="login/login.html" title="Đăng nhập"><span class="hidden-xs">Đăng nhập</span></a> </div>
-                </div>
-              </div>
-              <div class="form_search">
-                <form action="https://coffee-housetemplate.blogspot.com/search" class="navbar-form form_search_index" method="get">
-                  <div class="input-group">
-                    <input class="form-control block_in" id="search" maxlength="70" name="q" placeholder="Tìm kiếm" type="text" value=""/>
-                    <span class="input-group-btn">
-                    <button class="btn btn-default" type="submit"> <i class="fa fa-search"></i> Tìm kiếm</button>
-                    </span> </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
-</header>
 <table width="1095" border="0" align="center">
   <tbody>
-    <tr height="5px"> </tr>
     <tr align="center">
-      <td width="600" rowspan="7"><img src="images/01-ceylon-S-600x600.jpg" width="600" height="600"></td>
+      <td width="600" rowspan="8"><img src="images/01-ceylon-S-600x600.jpg" width="600" height="600"></td>
       <td colspan="2" align="left" ><font size="+3" color="#000000"><b>Trà Sữa Ceylon</b></font></td>
     </tr>
     <tr>
       <td><font size="+2"><b>Giá</b> </font></td>
       <td colspan="2"><font color="#EF0003" size="+2"><b>26000</b></font> <font size="+2">VND</font></td>
+    </tr>
+      <tr height="5px">
+      <td align="left"> Giảm giá
+        <hr/></td>
+      <td colspan="2">+0 VND
+        <hr/></td>
     </tr>
     <tr height="5px">
       <td align="left"> Phí vận chuyển
@@ -160,16 +142,25 @@ label.star:before {
     </tr>
     <tr height="5px">
       <td width="195">Size</td>
-      <td width="276" align="right"><div class="input-group">
-          <div id="radioBtn" class="btn-group"> <a class="btn btn-primary btn-sm active" data-toggle="happy" data-title="L">L</a> <a class="btn btn-primary btn-sm notActive" data-toggle="happy" data-title="M">M</a> </div>
-        </div></td>
+      <td width="276" align="left">
+      
+          <label class="radio">
+        <input type="radio" name="size" value="1" checked>
+        <span>M</span>
+    </label>
+    <label class="radio">
+        <input type="radio" name="size" value="2">
+        <span>L</span>
+    </label>
+          
+      </td>
     </tr>
     <tr>
       <td>Số Lượng</td>
       <td align="right"><div class="input-group"> <span class="input-group-btn">
           <button type="button" class="btn btn-danger btn-number" data-type="minus" data-field="tbxSl"> <span class="glyphicon glyphicon-minus"></span> </button>
           </span>
-          <input name="tbxSl" class="form-control input-number" value="1" min="1" max="10" type="text" readonly>
+          <input name="tbxSl" class="form-control input-number" value="1" min="1" max="10" type="text" readonly >
           <span class="input-group-btn">
           <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="tbxSl"> <span class="glyphicon glyphicon-plus"></span> </button>
           </span> </div></td>
@@ -192,7 +183,7 @@ label.star:before {
         </div></td>
     </tr>
     <tr>
-      <td colspan="2"><button type="button" class="btn btn-primary">Đưa vào giỏ hàng :v</button>
+      <td colspan="2" align="center"><button type="button" class="btn btn-primary">Đưa vào giỏ hàng :v</button>&nbsp;&nbsp;&nbsp;&nbsp;
         <button type="button" class="btn btn-danger">Quay lại trang chủ</button></td>
     </tr>
   </tbody>
